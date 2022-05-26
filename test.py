@@ -1,5 +1,5 @@
 import unittest
-import polylib
+import intpolylib
 
 class ParametrizedTestCase(unittest.TestCase):
     """ TestCase classes that want to be parametrized should
@@ -25,7 +25,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test1(self): # sprawdzanie wybranej dużej liczby wiekszej od 2^16
         data = 1048576
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576]
         minus = [-i for i in correctAnswer]
@@ -34,7 +34,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
     
     def test2(self): # sprawdzanie działania dla liczby 2^32
         data = 4294967296
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 
         2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824, 2147483648, 4294967296]
@@ -44,7 +44,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test3(self): # duża liczba zawierająca dzielnik będący liczbą pierwszą większą niż 2^16
         data = 5247145
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 5, 1049429, 5247145]
         minus = [-i for i in correctAnswer]
@@ -53,7 +53,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test4(self): # liczba mniejsza niż 2^16
         data = 25000
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 125, 200, 250, 500, 625, 1000, 1250, 2500, 3125, 5000, 6250, 12500, 25000]
         minus = [-i for i in correctAnswer]
@@ -62,7 +62,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
     
     def test5(self): # liczba > 2^16 zawierająca małe dzielniki jak i duże dzielniki pierwsze
         data = 20988580
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 2, 4, 5, 10, 20, 1049429, 2098858, 4197716, 5247145, 10494290, 20988580]
         minus = [-i for i in correctAnswer]
@@ -71,7 +71,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test6(self): # faktoryzacja liczby pierwszej > 2^16
         data = 9064457
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 9064457]
         minus = [-i for i in correctAnswer]
@@ -80,7 +80,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test7(self): # faktoryzacja 1
         data = 1
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1]
         minus = [-i for i in correctAnswer]
@@ -89,14 +89,14 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
 
     def test8(self): # faktoryzacja 0
         data = 0
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = []
         self.assertEqual(result, correctAnswer)
 
     def test9(self): # liczba z dużą ilością dzielników
         data = 2183462912
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         result = base.findDivisors(data)
         correctAnswer = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 33317, 65536, 66634, 133268, 
         266536, 533072, 1066144, 2132288, 4264576, 8529152, 17058304, 34116608, 68233216, 136466432, 272932864, 545865728, 1091731456, 2183462912]
@@ -105,7 +105,7 @@ class TestFindDivisors(ParametrizedTestCase): # testy funkcji znajdującej dziel
         self.assertEqual(result, correctAnswer)
 
     def test10(self): # testy dzielników mniejszych liczb
-        base = polylib.BasePolynomial()
+        base = intpolylib.BasePolynomial()
         for i in range(1, 10000):
             result = base.findDivisors(i)
             correctAnswer = [number for number in range(1, i+1) if i % number == 0]
@@ -475,7 +475,7 @@ class TestBasicOperations(ParametrizedTestCase):
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    polyforms = [polylib.ListPolynomial, polylib.DictPolynomial, polylib.PointsPolynomial]
+    polyforms = [intpolylib.ListPolynomial, intpolylib.DictPolynomial, intpolylib.PointsPolynomial]
     suite.addTest(ParametrizedTestCase.parametrize(TestFindDivisors))
     for form in polyforms:
         suite.addTest(ParametrizedTestCase.parametrize(TestFactorization, param=form))
