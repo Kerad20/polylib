@@ -22,15 +22,6 @@ class PointsPolynomial(BasePolynomial):
         else:
             raise TypeError("Polynomials must be str or list of points")
 
-    # def toList(self): # zamiana z punktów na listę wspolczynnikow
-    #     degree = len(self._polynomial)
-    #     x = np.array(self._polynomial)
-    #     eq = [[i**p for p in range(degree)] for i in range(degree)] # rownania
-    #     Y = x[:, 1] # prawa strona ukladu rownan
-    #     X = np.array(eq)
-    #     A = np.linalg.solve(X, Y) # wyznaczenie wspolczynnikow
-    #     return [int(np.round(i)) for i in list(A)]
-
     def __extendForm(self, other):
         """ Increases the number of polynomial points so that you can make calculations on them, 
             the number of points must be the same for the calculation.
